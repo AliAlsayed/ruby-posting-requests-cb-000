@@ -5,6 +5,7 @@ class TipsController < ApplicationController
       req.params['oauth_token'] = session[:token]
       req.params['v'] = '20160201'
     end
+    @results = JSON.parse(resp.body)["response"]["tips"]["items"]
   end
   def create
     resp = Faraday.post("https://api.foursquare.com/v2/tips/add") do |req|
